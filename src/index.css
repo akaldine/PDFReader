@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* Custom scrollbar for PDF viewer */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Ensure dragged items are on top of everything */
+.react-draggable-dragging {
+  z-index: 9999 !important;
+}
