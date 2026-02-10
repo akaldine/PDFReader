@@ -1,73 +1,84 @@
-# React + TypeScript + Vite
+# PDF Editor & Reader
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, lightweight, and secure PDF editor built for the desktop. This application allows you to view, annotate, and sign PDF documents with ease, running entirely locally on your machine.
 
-Currently, two official plugins are available:
+## Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 📄 PDF Viewing & Navigation
+-   **High-Fidelity Rendering**: powered by `react-pdf` for accurate document display.
+-   **Zoom Controls**: Easily zoom in and out to closely inspect documents.
+-   **Page Navigation**: Smooth scrolling and page tracking.
 
-## React Compiler
+### ✍️ Annotation Tools
+-   **Add Text**: Click anywhere to type text directly onto the PDF.
+-   **Interactive Mode**: Switch to "Interact" mode to drag and reposition text or signatures without accidental editing.
+-   **Cross-Page Support**: Drag annotations seamlessly from one page to another.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### ✒️ Advanced Signature System
+-   **Multiple Input Methods**:
+    -   **Draw**: Use your mouse or trackpad to draw your signature.
+    -   **Type**: Type your name and have it converted to a stylized cursive signature.
+-   **Saved Signatures**: Save your signature for future use. Instantly apply your saved signature to new documents from the "Saved" tab.
+-   **Smart Placement**: Signatures are automatically added to the center of the page you are currently viewing.
+-   **Resizing**: Signatures are automatically scaled to professional dimensions.
 
-## Expanding the ESLint configuration
+### 💾 Save & Export
+-   **Local Processing**: All modifications happen locally. No files are uploaded to external servers.
+-   **PDF Re-assembly**: Uses `pdf-lib` to embed your annotations and signatures as native PDF elements, ensuring compatibility with any PDF reader.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Technical Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+This project is built using modern web technologies wrapped in Electron for a native desktop experience.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+-   **Core Framework**: [React](https://react.dev/) (v18)
+-   **Language**: [TypeScript](https://www.typescriptlang.org/)
+-   **Desktop Runtime**: [Electron](https://www.electronjs.org/)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-   **Build Tool**: [Vite](https://vitejs.dev/)
+
+### Key Libraries
+-   **`react-pdf`**: For rendering PDF pages in the DOM.
+-   **`pdf-lib`**: For modifying the underlying PDF binary (adding annotations/images) and saving the file.
+-   **`react-draggable`**: Enabling smooth drag-and-drop functionality for annotations.
+-   **`react-signature-canvas`**: Providing the drawing pad interface for signatures.
+-   **`lucide-react`**: For the beautiful and consistent icon set.
+
+## Getting Started
+
+### Prerequisites
+-   Node.js (v16 or higher)
+-   npm
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/akaldine/PDFReader.git
+    cd PDFReader
+    ```
+
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+
+### Running the App
+
+To run the application in development mode (with Hot Module Replacement):
+
+```bash
+npm run electron:dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This will launch both the Vite dev server and the Electron window.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Building for Production
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+To create a distributable executable (e.g., .exe for Windows):
+
+```bash
+npm run electron:build
 ```
+The output will be in the `dist-electron` directory.
